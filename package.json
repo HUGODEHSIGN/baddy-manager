@@ -1,6 +1,7 @@
 {
   "name": "baddy-manager",
   "devDependencies": {
+    "@flydotio/dockerfile": "^0.5.7",
     "@types/bun": "latest",
     "concurrently": "^8.2.2"
   },
@@ -8,9 +9,9 @@
     "typescript": "^5.0.0"
   },
   "scripts": {
-    "start": "bun server/server.js",
+    "start": "bun server/src/index.ts",
     "dev": "concurrently \"cd server && bun run dev\" \"cd client && bun run dev\"",
-    "install": "cd server && npm i && cd ../client && npm i",
+    "install": "cd server && bun install && cd ../client && bun install",
     "build": "cd client && npm run build"
   },
   "type": "module"
