@@ -1,11 +1,11 @@
-import { Hono } from 'hono';
-import { serveStatic } from 'hono/bun';
+import staticPlugin from '@elysiajs/static';
+import { Elysia } from 'elysia';
 
-const app = new Hono();
+const app = new Elysia()
+  .use(staticPlugin({ assets: 'client/dist', prefix: '/' }))
+  .get('/', () => Bun.file('client/dist/index.html'))
+  .listen(3000);
 
-app.use('*', serveStatic({ root: './client/dist' }));
-app.get('*', serveStatic({ path: './client/dist/index.html' }));
-
-console.log('server is running');
-
-export default app;
+console.log(
+  `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
+);

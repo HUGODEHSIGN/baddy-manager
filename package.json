@@ -14,5 +14,8 @@
     "install": "cd server && bun install && cd ../client && bun install",
     "build": "cd client && npm run build"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "@elysiajs/static": "^1.0.3"
+  }
 }
