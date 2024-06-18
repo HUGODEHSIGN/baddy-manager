@@ -1,16 +1,17 @@
 {
   "name": "baddy-manager",
-  "type": "module",
-  "scripts": {
-    "start": "bun server/server.js",
-    "dev": "concurrently \"cd server && bun run dev\" \"cd client && bun run dev\"",
-    "install": "cd server && npm i && cd ../client && npm i"
-  },
   "devDependencies": {
     "@types/bun": "latest",
     "concurrently": "^8.2.2"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
-  }
+  },
+  "scripts": {
+    "start": "bun server/server.js",
+    "dev": "concurrently \"cd server && bun run dev\" \"cd client && bun run dev\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "build": "cd client && npm run build"
+  },
+  "type": "module"
 }
