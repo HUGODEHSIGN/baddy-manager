@@ -1,0 +1,19 @@
+{
+  "id": "mig_cpostkdhc6vlibrjp310",
+  "parentID": "mig_cpostcemvg39n5urg4e0",
+  "checksum": "1:566feb2776cda00aa10958e2d96aef957c1300c66fe44b43ad6bcc72cd86f5e6",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "locationId",
+          "type": "link",
+          "link": {
+            "table": "location"
+          }
+        },
+        "table": "court"
+      }
+    }
+  ]
+}

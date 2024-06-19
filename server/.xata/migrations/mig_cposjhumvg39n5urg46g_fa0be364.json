@@ -1,0 +1,17 @@
+{
+  "id": "mig_cposjhumvg39n5urg46g",
+  "parentID": "mig_cposj9umvg39n5urg45g",
+  "checksum": "1:fa0be364ecb153810e909f19f4f34f1d15bb954dc6f096f3d16f9d8cbd3bb5f8",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "name",
+          "type": "string",
+          "unique": true
+        },
+        "table": "court"
+      }
+    }
+  ]
+}
