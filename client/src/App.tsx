@@ -1,23 +1,42 @@
-import { useEffect } from 'react';
-import { Button } from 'tamagui';
-import './App.css';
-import Provider from './Provider';
+import Providers from '@/providers/index';
+import { Button, H1, Input } from 'tamagui';
+
+import { socket } from '@/eden/socket';
+import type { App } from '@/server/index';
+import { useEffect, useState } from 'react';
 
 function App() {
+  const [isConnected, setIsConnected] = useState(false);
+
   useEffect(() => {
-    console.log('test');
-    async function getData() {
-      const res = await fetch('/api/users');
-      const data = await res.json();
-      console.log(data);
+    function onConnect() {
+      setIsConnected(true);
     }
-    getData();
+    function onDisconnect() {
+      setIsConnected(false);
+    }
+    function onMessage(message: string) {
+      console.log(message);
+    }
+
+    socket.on('open', onConnect);
+    socket.on('close', onDisconnect);
+    socket.on('message', ({ data }) => onMessage(data));
+
+    return () => {
+      socket.off('open', onConnect);
+      socket.off('close', onDisconnect);
+      socket.off('message', ({ data }) => onMessage(data));
+    };
   }, []);
+
   return (
     <>
-      <Provider>
-        <Button>test</Button>
-      </Provider>
+      <Providers>
+        <Input />
+        <H1>{isConnected.toString()}</H1>
+        <Button onMouseUp={() => socket.send({ message: 'hi!' })}>test</Button>
+      </Providers>
     </>
   );
 }
