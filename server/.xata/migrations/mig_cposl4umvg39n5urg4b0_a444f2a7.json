@@ -1,0 +1,16 @@
+{
+  "id": "mig_cposl4umvg39n5urg4b0",
+  "parentID": "mig_cposkjemvg39n5urg490",
+  "checksum": "1:a444f2a7bc471f7af52beebcbf05fabb7acaf603987968e75c6a5ef383b6c60a",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "test",
+          "type": "multiple"
+        },
+        "table": "location"
+      }
+    }
+  ]
+}

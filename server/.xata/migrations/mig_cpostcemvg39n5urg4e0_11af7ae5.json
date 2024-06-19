@@ -1,0 +1,13 @@
+{
+  "id": "mig_cpostcemvg39n5urg4e0",
+  "parentID": "mig_cposs8lhc6vlibrjp300",
+  "checksum": "1:11af7ae5109385692304189d3d7103fb9ccb37ef01e5bb14ea87c3150fdc98f2",
+  "operations": [
+    {
+      "removeColumn": {
+        "column": "locationId",
+        "table": "court"
+      }
+    }
+  ]
+}
