@@ -1,31 +1,27 @@
-import Providers from '@/client/providers/index';
-import { Home, Location, Root } from '@/client/routes';
-import locationIdLoader, {
-  locationIdPath,
-} from '@/client/routes/loaders/location';
-import '@radix-ui/themes/styles.css';
-import React from 'react';
+import { RouterProvider, createRouter } from '@tanstack/react-router';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
-import { RouterProvider } from 'react-router-dom';
-import { typesafeBrowserRouter } from 'react-router-typesafe';
 
-const { router, href } = typesafeBrowserRouter([
-  {
-    path: '/',
-    element: <Root />,
-    children: [
-      { path: '/', element: <Home /> },
-      { path: locationIdPath, loader: locationIdLoader, element: <Location /> },
-    ],
-  },
-]);
+// Import the generated route tree
+import { routeTree } from './routeTree.gen';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <Providers>
+// Create a new router instance
+const router = createRouter({ routeTree });
+
+// Register the router instance for type safety
+declare module '@tanstack/react-router' {
+  interface Register {
+    router: typeof router;
+  }
+}
+
+// Render the app
+const rootElement = document.getElementById('root')!;
+if (!rootElement.innerHTML) {
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(
+    <StrictMode>
       <RouterProvider router={router} />
-    </Providers>
-  </React.StrictMode>
-);
-
-export default href;
+    </StrictMode>
+  );
+}

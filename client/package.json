@@ -13,11 +13,11 @@
     "@elysiajs/eden": "^1.0.14",
     "@radix-ui/themes": "^3.0.5",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.23.1",
-    "react-router-typesafe": "^1.5.0"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@tanstack/router-devtools": "^1.39.4",
+    "@tanstack/router-plugin": "^1.39.5",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
