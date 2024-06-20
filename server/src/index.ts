@@ -1,16 +1,14 @@
 import cors from '@elysiajs/cors';
 import staticPlugin from '@elysiajs/static';
 import { Elysia, t } from 'elysia';
-import userRoutes from './api/user';
-import { db } from './db';
+
+import { apiRoutes } from '@/server/api';
 
 export const app = new Elysia()
   .use(cors())
-  .decorate('db', db)
-  .group('/api', (app) => app.use(userRoutes))
-
-  .use(staticPlugin({ assets: 'client/dist', prefix: '/' }))
-  .get('/', () => Bun.file('client/dist/index.html'))
+  .use(apiRoutes)
+  .use(staticPlugin({ assets: '../client/dist', prefix: '/' }))
+  .get('/', () => Bun.file('../client/dist/index.html'))
   .ws('/socket', {
     body: t.Object({
       message: t.String(),
