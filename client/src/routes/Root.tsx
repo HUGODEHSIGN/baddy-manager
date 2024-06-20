@@ -1,6 +1,5 @@
-import { Button, H1, Input } from 'tamagui';
-
 import { socket } from '@/eden/socket';
+import { Button } from '@radix-ui/themes';
 import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
@@ -20,20 +19,19 @@ export default function Root() {
 
     socket.on('open', onConnect);
     socket.on('close', onDisconnect);
-    socket.on('message', ({ data }) => onMessage(data));
+    socket.on('message', ({ data }: { data: string }) => onMessage(data));
 
     return () => {
       socket.off('open', onConnect);
       socket.off('close', onDisconnect);
-      socket.off('message', ({ data }) => onMessage(data));
+      socket.off('message', ({ data }: { data: string }) => onMessage(data));
     };
   }, []);
 
   return (
     <>
-      <Input />
-      <H1>{isConnected.toString()}</H1>
-      <Button onMouseUp={() => socket.send({ message: 'hi!' })}>test</Button>
+      <h1>{isConnected.toString()}</h1>
+      <Button onClick={() => socket.send({ message: 'hi!' })}>test</Button>
       <Outlet />
     </>
   );

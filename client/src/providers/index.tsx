@@ -1,5 +1,5 @@
-import Tamagui from '@/providers/Tamagui';
+import Radix from '@/providers/Radix';
 
 export default function Providers({ children }: { children: React.ReactNode }) {
-  return <Tamagui>{children}</Tamagui>;
+  return <Radix>{children}</Radix>;
 }

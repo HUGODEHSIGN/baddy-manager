@@ -9,10 +9,10 @@
     "typescript": "^5.0.0"
   },
   "scripts": {
-    "start": "bun server/src/index.ts",
+    "start": "cd server && bun run start",
     "dev": "concurrently \"cd server && bun run dev\" \"cd client && bun run dev\"",
     "install": "cd server && bun install && cd ../client && bun install",
-    "build": "cd client && npm run build"
+    "build": "cd server && bun run build && cd ../client && npm run build"
   },
   "type": "module"
 }

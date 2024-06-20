@@ -1,9 +1,9 @@
 import Providers from '@/providers';
 import { Home, Location, Root } from '@/routes';
+import '@radix-ui/themes/styles.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 const router = createBrowserRouter([
   {
