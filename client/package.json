@@ -7,14 +7,15 @@
     "dev": "bunx --bun vite",
     "build": "bunx --bun vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "bunx --bun vite preview"
   },
   "dependencies": {
     "@elysiajs/eden": "^1.0.14",
     "@radix-ui/themes": "^3.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.23.1"
+    "react-router-dom": "^6.23.1",
+    "react-router-typesafe": "^1.5.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

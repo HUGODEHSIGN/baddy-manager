@@ -1,4 +1,4 @@
-import { socket } from '@/eden/socket';
+import { socket } from '@/client/eden/socket';
 import { Button } from '@radix-ui/themes';
 import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';

@@ -1,5 +1,5 @@
-import * as schema from '@/schema';
+import * as schema from '@/server/schema';
+import { getXataClient } from '@/server/xata'; // Generated client
 import { drizzle } from 'drizzle-orm/xata-http';
-import { getXataClient } from './xata'; // Generated client
 const xata = getXataClient();
 export const db = drizzle(xata, { schema });

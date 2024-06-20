@@ -1,5 +1,6 @@
-import { client } from '@/eden';
-import { LocationRecord } from '@/server/xata';
+import { client } from '@/client/eden';
+import type { LocationRecord } from '@/server/xata';
+
 import { Button } from '@radix-ui/themes';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -9,9 +10,9 @@ export default function Home() {
 
   useEffect(() => {
     async function fetchLocations() {
-      const { data }: { data: LocationRecord[] } =
-        await client.api.locations.get();
+      const { data } = await client.api.locations.index.get();
       setLocations(data);
+      console.log(data);
     }
     fetchLocations();
   }, []);

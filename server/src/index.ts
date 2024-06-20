@@ -1,12 +1,11 @@
-import { apiRoutes } from '@/api';
 import cors from '@elysiajs/cors';
 import staticPlugin from '@elysiajs/static';
 import { Elysia, t } from 'elysia';
-import { db } from './db';
+
+import { apiRoutes } from '@/server/api';
 
 export const app = new Elysia()
   .use(cors())
-  .decorate('db', db)
   .use(apiRoutes)
   .use(staticPlugin({ assets: '../client/dist', prefix: '/' }))
   .get('/', () => Bun.file('../client/dist/index.html'))

@@ -1,4 +1,4 @@
-import { Theme, ThemeProps } from '@radix-ui/themes';
+import { Theme, type ThemeProps } from '@radix-ui/themes';
 
 const themeConfig: ThemeProps = {
   // --- Colors ---
