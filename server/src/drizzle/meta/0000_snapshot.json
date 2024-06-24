@@ -1,0 +1,284 @@
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "prevId": "",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.court": {
+      "name": "court",
+      "schema": "",
+      "columns": {
+        "xata_version": {
+          "name": "xata_version",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "xata_createdat": {
+          "name": "xata_createdat",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "xata_updatedat": {
+          "name": "xata_updatedat",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "xata_id": {
+          "name": "xata_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "('rec_'::text || (xata_private.xid())::text)"
+        },
+        "locationId": {
+          "name": "locationId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'Court'"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "locationId_link": {
+          "name": "locationId_link",
+          "tableFrom": "court",
+          "tableTo": "location",
+          "schemaTo": "public",
+          "columnsFrom": [
+            "locationId"
+          ],
+          "columnsTo": [
+            "xata_id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "_pgroll_new_court_xata_id_key": {
+          "columns": [
+            "xata_id"
+          ],
+          "nullsNotDistinct": false,
+          "name": "_pgroll_new_court_xata_id_key"
+        }
+      }
+    },
+    "public.location": {
+      "name": "location",
+      "schema": "",
+      "columns": {
+        "xata_id": {
+          "name": "xata_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "('rec_'::text || (xata_private.xid())::text)"
+        },
+        "xata_version": {
+          "name": "xata_version",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "xata_createdat": {
+          "name": "xata_createdat",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "xata_updatedat": {
+          "name": "xata_updatedat",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "_pgroll_new_location_xata_id_key": {
+          "columns": [
+            "xata_id"
+          ],
+          "nullsNotDistinct": false,
+          "name": "_pgroll_new_location_xata_id_key"
+        }
+      }
+    },
+    "public.party": {
+      "name": "party",
+      "schema": "",
+      "columns": {
+        "xata_id": {
+          "name": "xata_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "('rec_'::text || (xata_private.xid())::text)"
+        },
+        "xata_version": {
+          "name": "xata_version",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "xata_createdat": {
+          "name": "xata_createdat",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "xata_updatedat": {
+          "name": "xata_updatedat",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "courtId": {
+          "name": "courtId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "courtId_link": {
+          "name": "courtId_link",
+          "tableFrom": "party",
+          "tableTo": "court",
+          "schemaTo": "public",
+          "columnsFrom": [
+            "courtId"
+          ],
+          "columnsTo": [
+            "xata_id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "_pgroll_new_party_xata_id_key": {
+          "columns": [
+            "xata_id"
+          ],
+          "nullsNotDistinct": false,
+          "name": "_pgroll_new_party_xata_id_key"
+        }
+      }
+    },
+    "public.user": {
+      "name": "user",
+      "schema": "",
+      "columns": {
+        "xata_updatedat": {
+          "name": "xata_updatedat",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "xata_id": {
+          "name": "xata_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "('rec_'::text || (xata_private.xid())::text)"
+        },
+        "xata_version": {
+          "name": "xata_version",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "xata_createdat": {
+          "name": "xata_createdat",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "partyId": {
+          "name": "partyId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "partyId_link": {
+          "name": "partyId_link",
+          "tableFrom": "user",
+          "tableTo": "party",
+          "schemaTo": "public",
+          "columnsFrom": [
+            "partyId"
+          ],
+          "columnsTo": [
+            "xata_id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "_pgroll_new_user_xata_id_key": {
+          "columns": [
+            "xata_id"
+          ],
+          "nullsNotDistinct": false,
+          "name": "_pgroll_new_user_xata_id_key"
+        }
+      }
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "tables": {}
+  }
+}

@@ -5,19 +5,21 @@
     "dev": "bun --watch src/index.ts",
     "build": "bun build src/index.ts --target bun --outdir ./build",
     "start": "NODE_ENV=production bun src/index.ts",
-    "test": "bun test"
+    "test": "bun test",
+    "drizzle:pull": "bun --bun drizzle-kit introspect"
   },
   "dependencies": {
     "@elysiajs/cors": "^1.0.2",
     "@elysiajs/static": "^1.0.3",
-    "@xata.io/client": "^0.29.5",
-    "@xata.io/drizzle": "^0.0.22",
     "drizzle-orm": "^0.31.2",
     "drizzle-typebox": "^0.1.1",
-    "elysia": "^1.0.24"
+    "elysia": "^1.0.24",
+    "pg": "^8.12.0"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "@types/pg": "^8.11.6",
+    "bun-types": "latest",
+    "drizzle-kit": "^0.22.7"
   },
   "module": "src/index.js"
 }

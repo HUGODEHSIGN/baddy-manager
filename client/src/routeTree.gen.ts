@@ -12,12 +12,18 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as FetchTestImport } from './routes/fetchTest'
+import { Route as LocationIdImport } from './routes/$locationId'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
 
 const FetchTestRoute = FetchTestImport.update({
   path: '/fetchTest',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LocationIdRoute = LocationIdImport.update({
+  path: '/$locationId',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -37,6 +43,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/$locationId': {
+      id: '/$locationId'
+      path: '/$locationId'
+      fullPath: '/$locationId'
+      preLoaderRoute: typeof LocationIdImport
+      parentRoute: typeof rootRoute
+    }
     '/fetchTest': {
       id: '/fetchTest'
       path: '/fetchTest'
@@ -49,7 +62,11 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren({ IndexRoute, FetchTestRoute })
+export const routeTree = rootRoute.addChildren({
+  IndexRoute,
+  LocationIdRoute,
+  FetchTestRoute,
+})
 
 /* prettier-ignore-end */
 
@@ -60,11 +77,15 @@ export const routeTree = rootRoute.addChildren({ IndexRoute, FetchTestRoute })
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/$locationId",
         "/fetchTest"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/$locationId": {
+      "filePath": "$locationId.tsx"
     },
     "/fetchTest": {
       "filePath": "fetchTest.tsx"

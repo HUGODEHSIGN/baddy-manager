@@ -1,16 +1,22 @@
 import { client } from '@/client/eden';
-import { createFileRoute } from '@tanstack/react-router';
-
-async function loader() {
-  return await client.api.locations.index.get();
-}
+import { Link, createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/fetchTest')({
-  loader,
+  loader: async () => await client.api.fetchTest.index.get(),
   component: Page,
 });
 
 function Page() {
   const { data } = Route.useLoaderData();
-  return <>{data?.map(({ name, id }) => <div key={id}>{name}</div>)}</>;
+  return (
+    <div>
+      {data?.map(({ xata_id: locationId, name }) => (
+        <Link
+          to="/$locationId"
+          params={{ locationId }}>
+          {name}
+        </Link>
+      ))}
+    </div>
+  );
 }

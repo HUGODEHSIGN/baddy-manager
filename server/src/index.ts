@@ -9,16 +9,17 @@ export const app = new Elysia()
   .use(apiRoutes)
   .use(staticPlugin({ assets: '../client/dist', prefix: '/' }))
   .get('/', () => Bun.file('../client/dist/index.html'))
-  .ws('/socket', {
+  .ws('/socket/:locationId', {
     body: t.Object({
       message: t.String(),
     }),
     response: t.String(),
     open(ws) {
-      ws.subscribe('group-1');
+      ws.subscribe(ws.data.params.locationId);
     },
     message(ws, { message }) {
-      ws.publish('group-1', message);
+      console.log(message);
+      ws.publish(ws.data.params.locationId, message);
     },
   })
   .listen(3000);
