@@ -1,6 +1,0 @@
-{
-  "databaseURL": "https://HUGODEHSIGN-s-workspace-cjhdv3.us-east-1.xata.sh/db/baddy-manager",
-  "codegen": {
-    "output": "src/xata.ts"
-  }
-}
