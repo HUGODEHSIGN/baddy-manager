@@ -28,7 +28,6 @@ export function useAppContext() {
   }
   return context;
 }
-
 // --- useUpdateCourts Custom Hook ---
 
 function useUpdateCourts(initialState: AppDataType) {
@@ -37,21 +36,48 @@ function useUpdateCourts(initialState: AppDataType) {
   const socket = useRef<
     | EdenWS<{
         body: {
-          message: string;
+          xata_id: string;
+          action: string;
         };
         params: Record<'locationId', string>;
         query: unknown;
         headers: unknown;
-        response: string;
+        response: {
+          xata_id: string;
+          action: string;
+        };
       }>
     | undefined
   >(undefined);
 
   const connected = socket.current?.ws.readyState === socket.current?.ws.OPEN;
   const [isConnected, setIsConnected] = useState(connected);
-  const [appState, _setAppState] = useState(initialState);
+  const [appState, setAppState] = useState(initialState);
+
+  type actionLookupType = Record<string, (xata_id: string) => void>;
 
   // ---place update context logic here ---
+  const actionLookup: actionLookupType = {
+    end_court_session: function (xata_id: string) {
+      const courtIndex = appState.courts.findIndex(
+        (court) => court.xata_id === xata_id
+      );
+      setAppState((prev) => {
+        return {
+          ...prev,
+          courts: prev.courts.map((court, index) => {
+            if (index === courtIndex) {
+              return {
+                ...court,
+                parties: court.parties.slice(1),
+              };
+            }
+            return court;
+          }),
+        };
+      });
+    },
+  };
 
   useEffect(() => {
     if (locationId) {
@@ -68,8 +94,9 @@ function useUpdateCourts(initialState: AppDataType) {
       setIsConnected(false);
     }
 
-    function onEvent(value) {
-      console.log(value);
+    function onEvent({ data }: { data: { xata_id: string; action: string } }) {
+      const { xata_id, action } = data;
+      actionLookup[action](xata_id);
     }
 
     socket.current?.on('open', onConnect);
@@ -84,8 +111,9 @@ function useUpdateCourts(initialState: AppDataType) {
   }, []);
 
   function endGameSession(xata_id: string) {
-    console.log(xata_id);
-    socket.current?.send({ message: xata_id });
+    const action = 'end_court_session';
+    actionLookup[action](xata_id);
+    socket.current?.send({ xata_id, action });
   }
 
   return { appState, endGameSession };
